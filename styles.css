@@ -1,0 +1,32 @@
+body, html {
+    height: 100%;
+    margin: 8px;
+    margin-left: 72px;
+    margin-right: 72px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+    --grid-cols: 1;
+    --grid-rows: 1;
+  }
+
+  .container {
+
+  }
+
+    .game-board { 
+        display: grid;
+        grid-template-rows: repeat(var(--grid-rows), 1fr);
+        grid-template-columns: repeat(var(--grid-cols), 1fr);
+
+        /* Define Game Board Height */
+        height: 300px;
+        width: 300px;
+        border: black;
+        box-shadow: 5px 5px lightgray;
+    }
+
+        .game-square {
+            border: 1px solid black;
+        }
