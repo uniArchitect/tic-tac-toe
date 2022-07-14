@@ -12,7 +12,8 @@ body, html {
   }
 
   .container {
-
+    /* Position to middle of page */
+    display: grid;
   }
 
     .game-board { 
