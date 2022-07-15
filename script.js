@@ -25,4 +25,15 @@ const gamePage = (() => {
 
 // Compose - Player Action
 
+const gameAction = (() => {
+    const circleMove = document.querySelector('.game-square').addEventListener('click', (e) => {
+        console.log(e.target);
+        const circle = document.createElement('div').innerHTML = 'O';
+        gameSquare.appendChild(circle).className = 'circle';
+    })
+
+    return {circleMove};
+
+})();
+
 // Compose - Check Winner
