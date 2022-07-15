@@ -25,15 +25,21 @@ const gamePage = (() => {
 
 // Compose - Player Action
 
-const gameAction = (() => {
-    const circleMove = document.querySelector('.game-square').addEventListener('click', (e) => {
+const gameAction = (() => { 
+    let gameSquare = document.querySelector('.game-square');
+    const circle = document.createElement('div').innerHTML = 'O';
+    const cross = document.createElement('div').innerHTML = 'X';
+    
+    changeMark = (element) => {
+        element.appendChild(circle).className = 'circle';
+    }
+
+    const circleMove = document.querySelector('.game-board').addEventListener('click', (e) => {
         console.log(e.target);
-        const circle = document.createElement('div').innerHTML = 'O';
-        gameSquare.appendChild(circle).className = 'circle';
+        gameSquare.changeMark(e.target);
     })
-
-    return {circleMove};
-
+    
+    return {circleMove, gameSquare, circle, cross, changeMark}
 })();
 
 // Compose - Check Winner
