@@ -26,7 +26,8 @@ const gamePage = (() => {
 // Compose - Player Action
 
 const gameAction = (() => { 
-    let gameSquare = document.querySelector('.game-square');
+    // querySelectorAll class: game-square put all game-square divs into an array NodeList
+    const gameSquare = document.querySelectorAll('.game-square');
 
     // Define X Node
     const cross = document.createElement('div').innerHTML = 'X';
@@ -49,12 +50,19 @@ const gameAction = (() => {
         element.appendChild(circle).className = 'circle-mark';
     }
     
-    const circleMove = document.querySelector('.game-board').addEventListener('click', (e) => {
-        // console.log(e.target);
-        changeMark(e.target);
+    // const circleMove = document.querySelector('.game-board').addEventListener('click', (e) => {
+    //     // console.log(e.target);
+    //     changeMark(e.target);
+    // }, {once:true});
+
+    gameSquare.forEach(gameSquare => {
+        gameSquare.addEventListener('click', (e) => {
+            console.log(e.target);
+            // changeMark(e.target);
+        }, {once:true});
     })
     
-    return {circleMove, gameSquare, circle, cross, changeMark}
+    return {gameSquare, circle, cross, changeMark}
 })();
 
 // Compose - Check Winner
