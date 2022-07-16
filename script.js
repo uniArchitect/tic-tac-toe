@@ -28,7 +28,7 @@ const gamePage = (() => {
 const gameAction = (() => { 
     // querySelectorAll class: game-square put all game-square divs into an array NodeList
     const gameSquare = document.querySelectorAll('.game-square');
-    let circleMove;
+    let circleMove
 
     // Define X Node
     const cross = document.createElement('div');
@@ -58,10 +58,14 @@ const gameAction = (() => {
             // Decides which move is up next
             const currentMove = circleMove ? circle : cross;
             changeMark(e.target, currentMove);
+            swapTurns();
         }, {once:true});
     })
 
     // Event: Alternate mark every turn
+    swapTurns = () => {
+        circleMove = !circleMove;
+    }
     
     return {gameSquare, circle, cross, changeMark}
 })();
