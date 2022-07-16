@@ -57,12 +57,16 @@ const gameAction = (() => {
             // console.log(e.target);
             // Decides which move is up next
             const currentMove = circleMove ? circle : cross;
+            // Make a move 'O' or 'X'
             changeMark(e.target, currentMove);
+            // Enables the ternary operator (? :) in currentMove to switch conditions
             swapTurns();
+            // once:true limits EventListener click to be run only once in each instance
         }, {once:true});
     })
 
     // Event: Alternate mark every turn
+    // Enables the ternary operator (? :) in currentMove to switch conditions
     swapTurns = () => {
         circleMove = !circleMove;
     }
