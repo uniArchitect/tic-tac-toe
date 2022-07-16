@@ -28,9 +28,10 @@ const gamePage = (() => {
 const gameAction = (() => { 
     // querySelectorAll class: game-square put all game-square divs into an array NodeList
     const gameSquare = document.querySelectorAll('.game-square');
+    let circleMove;
 
     // Define X Node
-    const cross = document.createElement('div').innerHTML = 'X';
+    const cross = document.createElement('div');
     cross.innerHTML = `
     <svg style="width:24px;height:24px" viewBox="0 0 24 24">
         <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
@@ -46,21 +47,21 @@ const gameAction = (() => {
     `
 
     // Event: Make a move 'O' or 'X'
-    changeMark = (element) => {
-        element.appendChild(circle).className = 'circle-mark';
+    changeMark = (element, currentMove) => {
+        element.appendChild(currentMove);
     }
-    
-    // const circleMove = document.querySelector('.game-board').addEventListener('click', (e) => {
-    //     // console.log(e.target);
-    //     changeMark(e.target);
-    // }, {once:true});
 
+    // Event: Changes mark for empty div
     gameSquare.forEach(gameSquare => {
         gameSquare.addEventListener('click', (e) => {
             // console.log(e.target);
-            changeMark(e.target);
+            // Decides which move is up next
+            const currentMove = circleMove ? circle : cross;
+            changeMark(e.target, currentMove);
         }, {once:true});
     })
+
+    // Event: Alternate mark every turn
     
     return {gameSquare, circle, cross, changeMark}
 })();
