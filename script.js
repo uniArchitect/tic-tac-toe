@@ -57,8 +57,8 @@ const gameAction = (() => {
 
     gameSquare.forEach(gameSquare => {
         gameSquare.addEventListener('click', (e) => {
-            console.log(e.target);
-            // changeMark(e.target);
+            // console.log(e.target);
+            changeMark(e.target);
         }, {once:true});
     })
     
