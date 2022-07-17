@@ -28,6 +28,7 @@ const gamePage = (() => {
 const gameAction = (() => { 
     // querySelectorAll class: game-square put all game-square divs into an array NodeList
     const gameSquare = document.querySelectorAll('.game-square');
+    let playerMoves = [];
     let circleMove
 
     // Winning Combinations
@@ -55,8 +56,7 @@ const gameAction = (() => {
         gameSquare.addEventListener('click', (e) => {
             // console.log(e.target);
             // State the index of the game board array
-            const index = [...gameSquare.parentElement.children].indexOf(gameSquare);
-            console.log(index);
+            assignIndexValue(gameSquare);
             // Define X Node
             const cross = document.createElement('div');
             cross.innerHTML = `
@@ -87,9 +87,20 @@ const gameAction = (() => {
         circleMove = !circleMove;
     }
 
+    // Assign index to an array for each player
+    assignIndexValue = (gameSquare) => {
+        const index = [...gameSquare.parentElement.children].indexOf(gameSquare);
+        console.log(`${index}`);
+        playerMoves.push(`${index}`);
+        return playerMoves
+    }
 
+    // Check for winning combination
+    // checkWinner = () => {
+    //     if()
+    // }
     
-    return {gameSquare, circle, cross, changeMark}
+    return {gameSquare, changeMark, playerMoves}
 })();
 
 // Compose - Check Winner
