@@ -85,6 +85,9 @@ const gameAction = (() => {
 
             // Enables the ternary operator (? :) in currentMove to switch conditions
             swapTurns();
+
+            // checkWinner();
+            
             // once:true limits EventListener click to be run only once in each instance
         }, {once:true});
     })
@@ -112,7 +115,11 @@ const gameAction = (() => {
 
     // Check for winning combination
     // checkWinner = () => {
-    //     if(playerMoves = )
+    //     if(circleArray.includes(...winningCombos) == 'true') {
+    //         console.log('O Wins!')
+    //     } else if (crossArray.includes(...winningCombos) == 'true') {
+    //         console.log('X Wins')
+    //     }
     // }
     
     return {gameSquare, changeMark, circleArray, crossArray, winningCombos}
