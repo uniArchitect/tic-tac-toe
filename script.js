@@ -55,7 +55,10 @@ const gameAction = (() => {
     gameSquare.forEach(gameSquare => {
         gameSquare.addEventListener('click', (e) => {
             // console.log(e.target);
-                // Define X Node
+            // State the index of the game board array
+            const index = [...gameSquare.parentElement.children].indexOf(gameSquare);
+            console.log(index);
+            // Define X Node
             const cross = document.createElement('div');
             cross.innerHTML = `
             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
