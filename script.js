@@ -28,7 +28,9 @@ const gamePage = (() => {
 const gameAction = (() => { 
     // querySelectorAll class: game-square put all game-square divs into an array NodeList
     const gameSquare = document.querySelectorAll('.game-square');
-    let playerMoves = [];
+    // Set up 2 arrays for both players
+    let circleArray = [];
+    let crossArray = [];
     let circleMove
 
     // Winning Combinations
@@ -55,8 +57,6 @@ const gameAction = (() => {
     gameSquare.forEach(gameSquare => {
         gameSquare.addEventListener('click', (e) => {
             // console.log(e.target);
-            // State the index of the game board array
-            assignIndexValue(gameSquare);
             // Define X Node
             const cross = document.createElement('div');
             cross.innerHTML = `
@@ -75,6 +75,14 @@ const gameAction = (() => {
             const currentMove = circleMove ? circle : cross;
             // Make a move 'O' or 'X'
             changeMark(e.target, currentMove);
+            
+            // Assign index value here as currentMove swaps
+            if(currentMove == circle) {
+                assignCircleIndex(gameSquare);
+            } else {
+                assignCrossIndex(gameSquare);
+            };
+
             // Enables the ternary operator (? :) in currentMove to switch conditions
             swapTurns();
             // once:true limits EventListener click to be run only once in each instance
@@ -88,19 +96,26 @@ const gameAction = (() => {
     }
 
     // Assign index to an array for each player
-    assignIndexValue = (gameSquare) => {
+    assignCircleIndex = (gameSquare) => {
         const index = [...gameSquare.parentElement.children].indexOf(gameSquare);
         console.log(`${index}`);
-        playerMoves.push(`${index}`);
-        return playerMoves
+        circleArray.push(`${index}`);
+        return circleArray
+    }
+
+    assignCrossIndex = (gameSquare) => {
+        const index = [...gameSquare.parentElement.children].indexOf(gameSquare);
+        console.log(`${index}`);
+        crossArray.push(`${index}`);
+        return crossArray
     }
 
     // Check for winning combination
     // checkWinner = () => {
-    //     if()
+    //     if(playerMoves = )
     // }
     
-    return {gameSquare, changeMark, playerMoves}
+    return {gameSquare, changeMark, circleArray, crossArray, winningCombos}
 })();
 
 // Compose - Check Winner
