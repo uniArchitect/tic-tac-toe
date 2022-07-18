@@ -31,7 +31,7 @@ const gameAction = (() => {
     // Set up 2 arrays for both players
     let circleArray = [];
     let crossArray = [];
-    let circleMove
+    let crossMove
 
     // Winning Combinations
     const winningCombos = [
@@ -50,11 +50,6 @@ const gameAction = (() => {
 
     // Event: Make a move 'O' or 'X'
     changeMark = (element, currentMove) => {
-        if(currentMove.classList = 'cross') {
-            element.classList.add('X')
-        } else if(currentMove.classList = 'circle') {
-            element.classList.add('O')
-        }
         element.appendChild(currentMove);
     }
 
@@ -78,26 +73,22 @@ const gameAction = (() => {
                 <path fill="currentColor" d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
             </svg>
             `
-            // Decides which move is up next
-            const currentMove = circleMove ? circle : cross;
+            // Decides which move is up next (crossMove by default is undefined)
+            const currentMove = crossMove ? circle : cross;
             // Make a move 'O' or 'X'
             changeMark(e.target, currentMove);
             
             // Assign index value here as currentMove swaps
-            if(currentMove == circle) {
-                assignCircleIndex(gameSquare);
-            } else {
+            if(currentMove == cross) {
                 assignCrossIndex(gameSquare);
+            } else {
+                assignCircleIndex(gameSquare);
             };
 
             // Enables the ternary operator (? :) in currentMove to switch conditions
             swapTurns();
 
-
-
-            // if(checkWinner(currentMove)) {
-            //     console.log('winner')
-            // }
+            testWinner();
 
             // once:true limits EventListener click to be run only once in each instance
         }, {once:true});
@@ -106,21 +97,39 @@ const gameAction = (() => {
     // Event: Alternate mark every turn
     // Enables the ternary operator (? :) in currentMove to switch conditions
     swapTurns = () => {
-        circleMove = !circleMove;
+        crossMove = !crossMove
     }
 
     // Assign index to an array for each player
     assignCircleIndex = (gameSquare) => {
         const index = [...gameSquare.parentElement.children].indexOf(gameSquare);
-        console.log(`${index}`);
-        circleArray.push(`${index}`);
+        console.log(index);
+        circleArray.push(index);
         return circleArray
+    }
+
+    testWinner = () => {
+
+        const comboMatches = winningCombos.some((combination) => {
+            // combination is an individual array in winningCombos
+            return combination.every(index => {
+                // index is each number in that array => has a childElement that contains classList 'cross' or 'circle'
+                // NOTE: returns null because a child element is not first created
+                return gameSquare[index].firstChild.classList.contains('circle');
+            });
+        })
+
+        // function checkCombos(combination) {
+        //     return combination = [...winningCombos]; 
+        // }
+
+        console.log(comboMatches);
     }
 
     assignCrossIndex = (gameSquare) => {
         const index = [...gameSquare.parentElement.children].indexOf(gameSquare);
-        console.log(`${index}`);
-        crossArray.push(`${index}`);
+        console.log(index);
+        crossArray.push(index);
         return crossArray
     }
 
@@ -139,18 +148,9 @@ const gameAction = (() => {
     //             return gameSquare[index].classList.contains(currentMove)
     //         })
     //     })
-    // }
+    // }    
 
-    function checkCrossWinner() {
-        return winningCombos.some(combinations => {
-            return combinations.every(index => {
-                return gameSquare[index].classList.contains()
-            })
-        })
-    }
-    
-
-    return {gameSquare, changeMark, circleArray, crossArray, winningCombos}
+    return {gameSquare, circleArray, crossArray, winningCombos,}
 })();
 
 // Compose - Check Winner
