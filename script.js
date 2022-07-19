@@ -20,7 +20,7 @@ const gamePage = (() => {
 
     defineBoard(3, 3);
 
-    return {container, gameBoard, defineBoard};
+    return {container, gameBoard};
 })();
 
 // Compose - Player Action
@@ -28,9 +28,6 @@ const gamePage = (() => {
 const gameAction = (() => { 
     // querySelectorAll class: game-square put all game-square divs into an array NodeList
     const gameSquare = document.querySelectorAll('.game-square');
-    // Set up 2 arrays for both players
-    let circleArray = [];
-    let crossArray = [];
     let crossMove
     let currentID
 
@@ -53,7 +50,7 @@ const gameAction = (() => {
     changeMark = (element, currentMove, currentID) => {
         element.setAttribute('id', currentID);
         element.appendChild(currentMove);
-        console.log(currentID);
+        // console.log(currentID);
     }
 
     // Event: Changes mark for empty div
@@ -87,10 +84,10 @@ const gameAction = (() => {
             // Enables the ternary operator (? :) in currentMove to switch conditions
             swapTurns();
 
-            if (testWinner(currentID) == 'true') {
-                console.log('win')
+            // Works because testWinner returns 'boolean' value true
+            if (testWinner(currentID) == true) {
+                console.log('win');
             }
-            
 
             // once:true limits EventListener click to be run only once in each instance
         }, {once:true});
@@ -103,32 +100,17 @@ const gameAction = (() => {
     }
 
     testWinner = (currentID) => {
-        // winningCombos is multidimensional array with all win combos
+        // 'winningCombos' is multidimensional array with all win combos
         const comboMatches = winningCombos.some((combination) => {
-            // combination is any individual array in winningCombos
+            // 'combination' is any individual array in winningCombos
             return combination.every((index) => {
-                // index is each number in that array => has an ID of 'cross' or 'circle'
+                // 'index' is each number in that array => has an ID of 'cross' or 'circle'
                 return gameSquare[index].id.includes(currentID)
-                // if(gameSquare[index].hasChildNodes() == 'true') {
-                //     return gameSquare[index].firstChild.classList.contains();
-                // }
             });
         })
-
-        // Lengthy array functions
-        // const comboMatches = winningCombos.some(checkWinningCombos(arg));
-
-        // function checkWinningCombos(arg) {
-        //     return arg.every(checkGameSquares(index))
-        // }
-
-        // function checkGameSquares(index) {
-        //     if(gameSquare[index].hasChildNodes() == 'true') {
-        //         return gameSquare[index].firstChild.classList.contains('circle');
-        //     } else return
-        // }
-
-        console.log(comboMatches);
+        // return the 'boolean' (true / false) value of comboMatches
+        return comboMatches
+        // console.log(typeof comboMatches, comboMatches);
     }
 
     return {gameSquare, currentID, crossMove, winningCombos}
