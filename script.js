@@ -83,18 +83,11 @@ const gameAction = (() => {
             const currentID = crossMove ? 'circle' : 'cross';
             // Make a move 'O' or 'X'
             changeMark(e.target, currentMove, currentID);
-            
-            // Assign index value here as currentMove swaps
-            if(currentMove == cross) {
-                assignCrossIndex(gameSquare);
-            } else {
-                assignCircleIndex(gameSquare);
-            };
 
             // Enables the ternary operator (? :) in currentMove to switch conditions
             swapTurns();
 
-            if (testWinner(currentID)) {
+            if (testWinner(currentID) == 'true') {
                 console.log('win')
             }
             
@@ -107,14 +100,6 @@ const gameAction = (() => {
     // Enables the ternary operator (? :) in currentMove to switch conditions
     swapTurns = () => {
         crossMove = !crossMove
-    }
-
-    // Assign index to an array for each player
-    assignCircleIndex = (gameSquare) => {
-        const index = [...gameSquare.parentElement.children].indexOf(gameSquare);
-        console.log(index);
-        circleArray.push(index);
-        return circleArray
     }
 
     testWinner = (currentID) => {
@@ -146,12 +131,5 @@ const gameAction = (() => {
         console.log(comboMatches);
     }
 
-    assignCrossIndex = (gameSquare) => {
-        const index = [...gameSquare.parentElement.children].indexOf(gameSquare);
-        console.log(index);
-        crossArray.push(index);
-        return crossArray
-    }
-
-    return {gameSquare, currentID, crossMove, circleArray, crossArray, winningCombos}
+    return {gameSquare, currentID, crossMove, winningCombos}
 })();
