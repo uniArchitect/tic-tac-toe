@@ -32,7 +32,7 @@ const gameAction = (() => {
     let circleArray = [];
     let crossArray = [];
     let crossMove
-    const currentSymbol = crossMove ? 'circle' : 'cross';
+    let currentID
 
     // Winning Combinations
     const winningCombos = [
@@ -50,9 +50,10 @@ const gameAction = (() => {
     ]
 
     // Event: Make a move 'O' or 'X'
-    changeMark = (element, currentMove) => {
-        element.setAttribute('id', currentSymbol);
+    changeMark = (element, currentMove, currentID) => {
+        element.setAttribute('id', currentID);
         element.appendChild(currentMove);
+        console.log(currentID);
     }
 
     // Event: Changes mark for empty div
@@ -79,8 +80,9 @@ const gameAction = (() => {
             `
             // Decides which move is up next (crossMove by default is undefined)
             const currentMove = crossMove ? circle : cross;
+            const currentID = crossMove ? 'circle' : 'cross';
             // Make a move 'O' or 'X'
-            changeMark(e.target, currentMove);
+            changeMark(e.target, currentMove, currentID);
             
             // Assign index value here as currentMove swaps
             if(currentMove == cross) {
@@ -92,7 +94,7 @@ const gameAction = (() => {
             // Enables the ternary operator (? :) in currentMove to switch conditions
             swapTurns();
 
-            if (testWinner(currentSymbol) == 'true') {
+            if (testWinner(currentID)) {
                 console.log('win')
             }
             
@@ -115,13 +117,13 @@ const gameAction = (() => {
         return circleArray
     }
 
-    testWinner = (currentSymbol) => {
+    testWinner = (currentID) => {
         // winningCombos is multidimensional array with all win combos
         const comboMatches = winningCombos.some((combination) => {
             // combination is any individual array in winningCombos
             return combination.every((index) => {
                 // index is each number in that array => has an ID of 'cross' or 'circle'
-                return gameSquare[index].id.includes(currentSymbol)
+                return gameSquare[index].id.includes(currentID)
                 // if(gameSquare[index].hasChildNodes() == 'true') {
                 //     return gameSquare[index].firstChild.classList.contains();
                 // }
@@ -151,5 +153,5 @@ const gameAction = (() => {
         return crossArray
     }
 
-    return {gameSquare, currentSymbol, circleArray, crossArray, winningCombos}
+    return {gameSquare, currentID, crossMove, circleArray, crossArray, winningCombos}
 })();
