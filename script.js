@@ -32,6 +32,7 @@ const gameAction = (() => {
     let circleArray = [];
     let crossArray = [];
     let crossMove
+    const currentSymbol = crossMove ? 'circle' : 'cross';
 
     // Winning Combinations
     const winningCombos = [
@@ -50,6 +51,7 @@ const gameAction = (() => {
 
     // Event: Make a move 'O' or 'X'
     changeMark = (element, currentMove) => {
+        element.setAttribute('id', currentSymbol);
         element.appendChild(currentMove);
     }
 
@@ -60,6 +62,7 @@ const gameAction = (() => {
             // Define X Node
             const cross = document.createElement('div')
             cross.classList.add('cross')
+            // cross.setAttribute('id', 'cross')
             cross.innerHTML = `
             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
@@ -68,6 +71,7 @@ const gameAction = (() => {
             // Define Circle Node
             const circle = document.createElement('div')
             circle.classList.add('circle')
+            // circle.setAttribute('id', 'circle')
             circle.innerHTML = `
             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
@@ -88,7 +92,10 @@ const gameAction = (() => {
             // Enables the ternary operator (? :) in currentMove to switch conditions
             swapTurns();
 
-            testWinner();
+            if (testWinner(currentSymbol) === 'false') {
+                console.log('win')
+            }
+            
 
             // once:true limits EventListener click to be run only once in each instance
         }, {once:true});
@@ -108,19 +115,30 @@ const gameAction = (() => {
         return circleArray
     }
 
-    testWinner = () => {
-
+    testWinner = (currentSymbol) => {
+        // winningCombos is multidimensional array with all win combos
         const comboMatches = winningCombos.some((combination) => {
-            // combination is an individual array in winningCombos
-            return combination.every(index => {
-                // index is each number in that array => has a childElement that contains classList 'cross' or 'circle'
-                // NOTE: returns null because a child element is not first created
-                return gameSquare[index].firstChild.classList.contains('circle');
+            // combination is any individual array in winningCombos
+            return combination.every((index) => {
+                // index is each number in that array => has a childElement 'cross' or 'circle'
+                return gameSquare[index].id.includes(currentSymbol)
+                // if(gameSquare[index].hasChildNodes() == 'true') {
+                //     return gameSquare[index].firstChild.classList.contains();
+                // } else return
             });
         })
 
-        // function checkCombos(combination) {
-        //     return combination = [...winningCombos]; 
+        // Lengthy array functions
+        // const comboMatches = winningCombos.some(checkWinningCombos(arg));
+
+        // function checkWinningCombos(arg) {
+        //     return arg.every(checkGameSquares(index))
+        // }
+
+        // function checkGameSquares(index) {
+        //     if(gameSquare[index].hasChildNodes() == 'true') {
+        //         return gameSquare[index].firstChild.classList.contains('circle');
+        //     } else return
         // }
 
         console.log(comboMatches);
