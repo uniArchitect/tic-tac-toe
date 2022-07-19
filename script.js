@@ -92,7 +92,7 @@ const gameAction = (() => {
             // Enables the ternary operator (? :) in currentMove to switch conditions
             swapTurns();
 
-            if (testWinner(currentSymbol) === 'false') {
+            if (testWinner(currentSymbol) == 'true') {
                 console.log('win')
             }
             
@@ -120,11 +120,11 @@ const gameAction = (() => {
         const comboMatches = winningCombos.some((combination) => {
             // combination is any individual array in winningCombos
             return combination.every((index) => {
-                // index is each number in that array => has a childElement 'cross' or 'circle'
+                // index is each number in that array => has an ID of 'cross' or 'circle'
                 return gameSquare[index].id.includes(currentSymbol)
                 // if(gameSquare[index].hasChildNodes() == 'true') {
                 //     return gameSquare[index].firstChild.classList.contains();
-                // } else return
+                // }
             });
         })
 
@@ -151,24 +151,5 @@ const gameAction = (() => {
         return crossArray
     }
 
-    // Check for winning combination
-    // checkWinner = (winningCombos) => {
-    //     if(circleArray.includes(winningCombos) == 'true') {
-    //         console.log('O Wins!')
-    //     } else if (crossArray.includes(winningCombos) == 'true') {
-    //         console.log('X Wins')
-    //     }
-    // }
-
-    // function checkWinner(currentMove) {
-    //     return winningCombos.some(combinations => {
-    //         return combinations.every(index => {
-    //             return gameSquare[index].classList.contains(currentMove)
-    //         })
-    //     })
-    // }    
-
-    return {gameSquare, circleArray, crossArray, winningCombos,}
+    return {gameSquare, currentSymbol, circleArray, crossArray, winningCombos}
 })();
-
-// Compose - Check Winner
