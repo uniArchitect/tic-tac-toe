@@ -14,6 +14,7 @@ const gamePage = (() => {
         gameBoard.style.setProperty('--grid-cols', cols);
         for(i = 0; i < (rows * cols); i++) {
             let gameSquare = document.createElement('div');
+            gameSquare.setAttribute('id', 'open-square')
             gameBoard.appendChild(gameSquare).className = "game-square";
         }
     }
@@ -114,6 +115,11 @@ const gameAction = (() => {
         // return the 'boolean' (true / false) value of comboMatches
         return comboMatches
         // console.log(typeof comboMatches, comboMatches);
+    }
+
+    function resetGame() {
+        prompt('Do you want to play again?')
+
     }
 
     return {gameSquare, currentID, crossMove, winningCombos, squareArray}
