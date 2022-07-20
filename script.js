@@ -89,8 +89,12 @@ const gameAction = (() => {
             // Works because testWinner returns 'boolean' value true
             if (testWinner(currentID) == true && currentID == 'circle') {
                 console.log('O Wins')
+                // resetGame(squareArray)
             } else if (testWinner(currentID) == true && currentID == 'cross') {
                 console.log('X Wins')
+                // resetGame(squareArray)
+            } else if (testDraw() == true) {
+                console.log('Draw!')
             }
 
             // once:true limits EventListener click to be run only once in each instance
@@ -117,9 +121,21 @@ const gameAction = (() => {
         // console.log(typeof comboMatches, comboMatches);
     }
 
-    function resetGame() {
-        prompt('Do you want to play again?')
+    testDraw = () => {
+        // 'index' is each node in squareArray
+        return squareArray.every(index => {
+            return index.hasChildNodes()
+        })
+    }
 
+    function resetGame(squareArray) {
+        // prompt('Do you want to play again?')
+        // for each node in squareArray, each will reset attribute and remove their child element
+        // BUG: Cannot clear if an empty node is present
+        for (i = 0; i <= squareArray.length; i++) {
+            squareArray[i].setAttribute('id', 'open-square');
+            squareArray[i].removeChild(squareArray[i].firstChild);
+        }
     }
 
     return {gameSquare, currentID, crossMove, winningCombos, squareArray}
