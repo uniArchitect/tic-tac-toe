@@ -1,27 +1,26 @@
 // Create HTML components
 const gamePage = (() => {
-    startPage = () => {
-        // Create container div
-        const container = document.createElement('div');
-        document.body.appendChild(container).className = 'container';
+    // Create container div
+    const container = document.createElement('div');
+    document.body.appendChild(container).className = 'container';
 
-        // Create Game Board
-        const gameBoard = document.createElement('div');
-        container.appendChild(gameBoard).className = 'game-board';
+    // Create Game Board
+    const gameBoard = document.createElement('div');
+    container.appendChild(gameBoard).className = 'game-board';
 
-        // Divide Game Board into 9 square grid
-        defineBoard = (rows, cols) => {
-            gameBoard.style.setProperty('--grid-rows', rows);
-            gameBoard.style.setProperty('--grid-cols', cols);
-            for(i = 0; i < (rows * cols); i++) {
-                let gameSquare = document.createElement('div');
-                gameSquare.setAttribute('id', 'open-square')
-                gameBoard.appendChild(gameSquare).className = "game-square";
-            }
+    // Divide Game Board into 9 square grid
+    defineBoard = (rows, cols) => {
+        gameBoard.style.setProperty('--grid-rows', rows);
+        gameBoard.style.setProperty('--grid-cols', cols);
+        for(i = 0; i < (rows * cols); i++) {
+            let gameSquare = document.createElement('div');
+            gameSquare.setAttribute('id', 'open-square')
+            gameBoard.appendChild(gameSquare).className = "game-square";
         }
-        defineBoard(3, 3);
     }
-    startPage();
+    defineBoard(3, 3);
+
+    return {container, gameBoard};
 })();
 
 // Compose - Player Action
@@ -88,15 +87,12 @@ const gameAction = (() => {
             // Works because testWinner returns 'boolean' value true
             if (testWinner(currentID) == true && currentID == 'circle') {
                 console.log('O Wins')
-                startPage();
                 // resetGame(squareArray)
             } else if (testWinner(currentID) == true && currentID == 'cross') {
                 console.log('X Wins')
-                startPage();
                 // resetGame(squareArray)
             } else if (testDraw() == true) {
                 console.log('Draw!')
-                startPage();
             }
     }
 
