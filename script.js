@@ -20,7 +20,10 @@ const gamePage = (() => {
     }
     defineBoard(3, 3);
 
-    return {container, gameBoard};
+    const restartBtn = document.createElement('button');
+    restartBtn.innerText = 'Play Again?'
+
+    return {container, gameBoard, restartBtn};
 })();
 
 // Compose - Player Action
@@ -29,8 +32,8 @@ const gameAction = (() => {
     // querySelectorAll class: game-square put all game-square divs into an array NodeList
     const gameSquare = document.querySelectorAll('.game-square');
     const squareArray = [...gameSquare];
-    let crossMove
-    let currentID
+    let crossMove = false;
+    let currentID = false;
 
     // Winning Combinations
     const winningCombos = [
@@ -87,12 +90,13 @@ const gameAction = (() => {
             // Works because testWinner returns 'boolean' value true
             if (testWinner(currentID) == true && currentID == 'circle') {
                 console.log('O Wins')
-                // resetGame(squareArray)
+                endGame()
             } else if (testWinner(currentID) == true && currentID == 'cross') {
                 console.log('X Wins')
-                // resetGame(squareArray)
+                endGame()
             } else if (testDraw() == true) {
                 console.log('Draw!')
+                endGame()
             }
     }
 
@@ -128,15 +132,31 @@ const gameAction = (() => {
         })
     }
 
-    function resetGame() {
+    // Event: Winner has been decided
+    endGame = () => {
+        gamePage.container.appendChild(gamePage.restartBtn).className = 'restart'
         // prompt('Do you want to play again?')
-        startPage()
         // BUG: Cannot clear if an empty node is present
         // for (i = 0; i <= squareArray.length; i++) {
         //     squareArray[i].setAttribute('id', 'open-square');
         //     squareArray[i].removeChild(squareArray[i].firstChild);
         // }
     }
+
+    // BUG: gameStart allows resetting of click events, but board is not cleared (Need child elements erased and id reset)
+    // BUG: for loop to clear the board doesn't allow resetting click event
+    gameStart = () => {
+        for (i = 0; i <= gameSquare.length; i++) {
+            gameSquare[i].setAttribute('id', 'open-square');
+            gameSquare[i].innerHTML=""
+        }
+
+        gameSquare.forEach(gameSquare => {
+            gameSquare.addEventListener('click', clickAction, {once:true});
+        })
+    }
+
+    gamePage.restartBtn.addEventListener('click', gameStart);
 
     return {gameSquare, currentID, crossMove, winningCombos, squareArray}
 })();
