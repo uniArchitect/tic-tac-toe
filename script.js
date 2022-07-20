@@ -28,6 +28,7 @@ const gamePage = (() => {
 const gameAction = (() => { 
     // querySelectorAll class: game-square put all game-square divs into an array NodeList
     const gameSquare = document.querySelectorAll('.game-square');
+    const squareArray = [...gameSquare];
     let crossMove
     let currentID
 
@@ -85,8 +86,10 @@ const gameAction = (() => {
             swapTurns();
 
             // Works because testWinner returns 'boolean' value true
-            if (testWinner(currentID) == true) {
-                console.log('win');
+            if (testWinner(currentID) == true && currentID == 'circle') {
+                console.log('O Wins')
+            } else if (testWinner(currentID) == true && currentID == 'cross') {
+                console.log('X Wins')
             }
 
             // once:true limits EventListener click to be run only once in each instance
@@ -113,5 +116,5 @@ const gameAction = (() => {
         // console.log(typeof comboMatches, comboMatches);
     }
 
-    return {gameSquare, currentID, crossMove, winningCombos}
+    return {gameSquare, currentID, crossMove, winningCombos, squareArray}
 })();
