@@ -1,27 +1,27 @@
 // Create HTML components
 const gamePage = (() => {
-    // Create container div
-    const container = document.createElement('div');
-    document.body.appendChild(container).className = 'container';
+    startPage = () => {
+        // Create container div
+        const container = document.createElement('div');
+        document.body.appendChild(container).className = 'container';
 
-    // Create Game Board
-    const gameBoard = document.createElement('div');
-    container.appendChild(gameBoard).className = 'game-board';
+        // Create Game Board
+        const gameBoard = document.createElement('div');
+        container.appendChild(gameBoard).className = 'game-board';
 
-    // Divide Game Board into 9 square grid
-    defineBoard = (rows, cols) => {
-        gameBoard.style.setProperty('--grid-rows', rows);
-        gameBoard.style.setProperty('--grid-cols', cols);
-        for(i = 0; i < (rows * cols); i++) {
-            let gameSquare = document.createElement('div');
-            gameSquare.setAttribute('id', 'open-square')
-            gameBoard.appendChild(gameSquare).className = "game-square";
+        // Divide Game Board into 9 square grid
+        defineBoard = (rows, cols) => {
+            gameBoard.style.setProperty('--grid-rows', rows);
+            gameBoard.style.setProperty('--grid-cols', cols);
+            for(i = 0; i < (rows * cols); i++) {
+                let gameSquare = document.createElement('div');
+                gameSquare.setAttribute('id', 'open-square')
+                gameBoard.appendChild(gameSquare).className = "game-square";
+            }
         }
+        defineBoard(3, 3);
     }
-
-    defineBoard(3, 3);
-
-    return {container, gameBoard};
+    startPage();
 })();
 
 // Compose - Player Action
@@ -89,12 +89,15 @@ const gameAction = (() => {
             // Works because testWinner returns 'boolean' value true
             if (testWinner(currentID) == true && currentID == 'circle') {
                 console.log('O Wins')
+                startPage();
                 // resetGame(squareArray)
             } else if (testWinner(currentID) == true && currentID == 'cross') {
                 console.log('X Wins')
+                startPage();
                 // resetGame(squareArray)
             } else if (testDraw() == true) {
                 console.log('Draw!')
+                startPage();
             }
 
             // once:true limits EventListener click to be run only once in each instance
@@ -128,14 +131,14 @@ const gameAction = (() => {
         })
     }
 
-    function resetGame(squareArray) {
+    function resetGame() {
         // prompt('Do you want to play again?')
-        // for each node in squareArray, each will reset attribute and remove their child element
+        defineBoard()
         // BUG: Cannot clear if an empty node is present
-        for (i = 0; i <= squareArray.length; i++) {
-            squareArray[i].setAttribute('id', 'open-square');
-            squareArray[i].removeChild(squareArray[i].firstChild);
-        }
+        // for (i = 0; i <= squareArray.length; i++) {
+        //     squareArray[i].setAttribute('id', 'open-square');
+        //     squareArray[i].removeChild(squareArray[i].firstChild);
+        // }
     }
 
     return {gameSquare, currentID, crossMove, winningCombos, squareArray}
