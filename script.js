@@ -55,10 +55,9 @@ const gameAction = (() => {
         // console.log(currentID);
     }
 
-    // Event: Changes mark for empty div
-    gameSquare.forEach(gameSquare => {
-        gameSquare.addEventListener('click', (e) => {
-            // console.log(e.target);
+    // Event: Click Action
+    clickAction = (e) => {
+        // console.log(e.target);
             // Define X Node
             const cross = document.createElement('div')
             cross.classList.add('cross')
@@ -99,9 +98,11 @@ const gameAction = (() => {
                 console.log('Draw!')
                 startPage();
             }
+    }
 
-            // once:true limits EventListener click to be run only once in each instance
-        }, {once:true});
+    // Event: Changes mark for empty div
+    gameSquare.forEach(gameSquare => {
+        gameSquare.addEventListener('click', clickAction, {once:true});
     })
 
     // Event: Alternate mark every turn
@@ -133,7 +134,7 @@ const gameAction = (() => {
 
     function resetGame() {
         // prompt('Do you want to play again?')
-        defineBoard()
+        startPage()
         // BUG: Cannot clear if an empty node is present
         // for (i = 0; i <= squareArray.length; i++) {
         //     squareArray[i].setAttribute('id', 'open-square');
