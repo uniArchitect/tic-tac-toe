@@ -1,16 +1,45 @@
 // Compose - Players 1 & 2
 const gamePlayers = (() => {
-    // Create Player Selection container
+    // Create Game Menu container
     const playerContainer = document.createElement('div');
     document.body.appendChild(playerContainer).className = 'selection-container';
 
-    // Create Player Selection buttons
-    const playerOneBtn = document.createElement('button');
-    playerOneBtn.innerText = 'Player One';
-    playerContainer.appendChild(playerOneBtn).className = 'select-btn';
-    const playerTwoBtn = document.createElement('button');
-    playerTwoBtn.innerText = 'Player Two';
-    playerContainer.appendChild(playerTwoBtn).className = 'select-btn';
+    // Create Game Menu buttons
+    const startGameBtn = document.createElement('button');
+    startGameBtn.innerText = 'Play Tic-Tac-Toe';
+    playerContainer.appendChild(startGameBtn).className = 'start-btn';
+
+    // Create Game Menu fields
+    const playerMenu = document.createElement('aside');
+    const playerForm = document.createElement('form');
+    const playerFormList = document.createElement('ul');
+    const playerListItemOne = document.createElement('li');
+    const playerListItemTwo = document.createElement('li');
+    const listLabelOne = document.createElement('label');
+    const listInputOne = document.createElement('input');
+    const listLabelTwo = document.createElement('label');
+    const listInputTwo = document.createElement('input');
+    playerContainer.appendChild(playerMenu).className = 'player-menu';
+    // Create Form
+    playerMenu.appendChild(playerForm).className = 'player-form';
+    playerForm.setAttribute('action', 'index.html');
+    playerForm.setAttribute('method', 'GET');
+    playerForm.appendChild(playerFormList);
+
+    // Create Player Inputs
+    playerFormList.appendChild(playerListItemOne);
+    listLabelOne.setAttribute('for', 'name');
+    listLabelOne.innerText = 'Player One'
+    playerListItemOne.appendChild(listLabelOne);
+    listInputOne.setAttribute('type', 'text');
+    playerListItemOne.appendChild(listInputOne);
+
+    playerFormList.appendChild(playerListItemTwo);
+    listLabelTwo.setAttribute('for', 'name');
+    listLabelTwo.innerText = 'Player Two'
+    playerListItemTwo.appendChild(listLabelTwo);
+    listInputTwo.setAttribute('type', 'text');
+    playerListItemTwo.appendChild(listInputTwo);
 
     return {playerContainer};
 })();
