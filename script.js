@@ -136,24 +136,30 @@ const gameAction = (() => {
     endGame = () => {
         gamePage.container.appendChild(gamePage.restartBtn).className = 'restart'
         // prompt('Do you want to play again?')
-        // BUG: Cannot clear if an empty node is present
-        // for (i = 0; i <= squareArray.length; i++) {
-        //     squareArray[i].setAttribute('id', 'open-square');
-        //     squareArray[i].removeChild(squareArray[i].firstChild);
-        // }
     }
 
     // BUG: gameStart allows resetting of click events, but board is not cleared (Need child elements erased and id reset)
+    // gameSquare is a NodeList and cannot use .setAttribute syntax
     // BUG: for loop to clear the board doesn't allow resetting click event
     gameStart = () => {
-        for (i = 0; i <= gameSquare.length; i++) {
-            gameSquare[i].setAttribute('id', 'open-square');
-            gameSquare[i].innerHTML=""
-        }
+        gameSquare.forEach((index) => {
+            index.setAttribute('id', 'open-square');
+            index.innerHTML="";
+        });
+
+        // function resetSquares(index) {
+        //     index.setAttribute('id', 'open-square');
+        //     index.innerHTML="";
+        // }
+        
+        // for (i = 0; i <= gameSquare.length; i++) {
+        //     gameSquare[i].setAttribute('id', 'open-square');
+        //     gameSquare[i].innerHTML=""
+        // }
 
         gameSquare.forEach(gameSquare => {
             gameSquare.addEventListener('click', clickAction, {once:true});
-        })
+        })    
     }
 
     gamePage.restartBtn.addEventListener('click', gameStart);
