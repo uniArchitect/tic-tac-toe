@@ -1,4 +1,21 @@
-// Create HTML components
+// Compose - Players 1 & 2
+const gamePlayers = (() => {
+    // Create Player Selection container
+    const playerContainer = document.createElement('div');
+    document.body.appendChild(playerContainer).className = 'selection-container';
+
+    // Create Player Selection buttons
+    const playerOneBtn = document.createElement('button');
+    playerOneBtn.innerText = 'Player One';
+    playerContainer.appendChild(playerOneBtn).className = 'select-btn';
+    const playerTwoBtn = document.createElement('button');
+    playerTwoBtn.innerText = 'Player Two';
+    playerContainer.appendChild(playerTwoBtn).className = 'select-btn';
+
+    return {playerContainer};
+})();
+
+// Create Game Board Vomponents
 const gamePage = (() => {
     // Create container div
     const container = document.createElement('div');
@@ -27,7 +44,6 @@ const gamePage = (() => {
 })();
 
 // Compose - Player Action
-
 const gameAction = (() => { 
     // querySelectorAll class: game-square put all game-square divs into an array NodeList
     const gameSquare = document.querySelectorAll('.game-square');
@@ -160,6 +176,8 @@ const gameAction = (() => {
         gameSquare.forEach(gameSquare => {
             gameSquare.addEventListener('click', clickAction, {once:true});
         })    
+        // Removes 'Play Again' button
+        gamePage.container.removeChild(gamePage.restartBtn);
     }
 
     gamePage.restartBtn.addEventListener('click', gameStart);
