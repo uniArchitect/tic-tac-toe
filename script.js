@@ -1,3 +1,10 @@
+class Game {
+    constructor(playerOneName, playerTwoName) {
+        this.playerOneName = playerOneName;
+        this.playerTwoName = playerTwoName;
+    }
+}
+
 // Compose - Players 1 & 2
 const gamePlayers = (() => {
     // Create Game Menu container
@@ -48,23 +55,37 @@ const gamePlayers = (() => {
     // Create Submit
     playerFormList.appendChild(playerFormSubmit);
     playerFormSubmit.setAttribute('type', 'submit')
+    
+    // Create a simple CLASS (Game) for player in the games so that Event Record Player can use the prototype.properties to record values into
+    // Function: Add HTML elements with recorded player names
+    addPlayers = (players) => {
+        // Event: Add Player HTML elements
+        const playerOne = document.createElement('div');
+        const playerTwo = document.createElement('div');
+        playerContainer.appendChild(playerOne);
+        playerContainer.appendChild(playerTwo);
 
-    // Event: Add Player HTML elements
-    const playerOne = document.createElement('div')
-    const playerTwo = document.createElement('div')
-    playerContainer.appendChild(playerOne).className = 'player-one';
-    playerContainer.appendChild(playerTwo).className = 'player-two';
-    // Record Player Names to variables
+        playerOne.classList.add('player-one');
+        playerTwo.classList.add('player-two');
 
+        playerOne.innerHTML = `<p>${players.playerOneName}</p>`;
+        playerTwo.innerHTML = `<p>${players.playerTwoName}</p>`;
+    }
+
+    // Event: Record Player Names to variables
     document.querySelector('.player-form').addEventListener('submit', (e) => {
     
         e.preventDefault();
     
-        // Recording form values
-        const playerOneName = document.querySelector('#player-one').value;
-        const playerTwoName = document.querySelector('#player-two').value;
+        // Recording Input Values
+        const playerOneName = document.querySelector('#player-one-name').value;
+        const playerTwoName = document.querySelector('#player-two-name').value;
 
-        // Create Player Scoreboard with named variables
+        // Create Player Scoreboard with named variables (Game) constructor class
+        const players = new Game(playerOneName, playerTwoName);
+
+        // Function to addPlayers to the HTML
+        addPlayers(players);
     })
 
     return {playerContainer};
