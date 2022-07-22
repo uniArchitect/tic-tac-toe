@@ -19,7 +19,9 @@ const gamePlayers = (() => {
     const listInputOne = document.createElement('input');
     const listLabelTwo = document.createElement('label');
     const listInputTwo = document.createElement('input');
+    const playerFormSubmit = document.createElement('input');
     playerContainer.appendChild(playerMenu).className = 'player-menu';
+
     // Create Form
     playerMenu.appendChild(playerForm).className = 'player-form';
     playerForm.setAttribute('action', 'index.html');
@@ -32,6 +34,7 @@ const gamePlayers = (() => {
     listLabelOne.innerText = 'Player One'
     playerListItemOne.appendChild(listLabelOne);
     listInputOne.setAttribute('type', 'text');
+    listInputOne.setAttribute('id', 'player-one-name');
     playerListItemOne.appendChild(listInputOne);
 
     playerFormList.appendChild(playerListItemTwo);
@@ -39,7 +42,30 @@ const gamePlayers = (() => {
     listLabelTwo.innerText = 'Player Two'
     playerListItemTwo.appendChild(listLabelTwo);
     listInputTwo.setAttribute('type', 'text');
+    listInputTwo.setAttribute('id', 'player-two-name');
     playerListItemTwo.appendChild(listInputTwo);
+
+    // Create Submit
+    playerFormList.appendChild(playerFormSubmit);
+    playerFormSubmit.setAttribute('type', 'submit')
+
+    // Event: Add Player HTML elements
+    const playerOne = document.createElement('div')
+    const playerTwo = document.createElement('div')
+    playerContainer.appendChild(playerOne).className = 'player-one';
+    playerContainer.appendChild(playerTwo).className = 'player-two';
+    // Record Player Names to variables
+
+    document.querySelector('.player-form').addEventListener('submit', (e) => {
+    
+        e.preventDefault();
+    
+        // Recording form values
+        const playerOneName = document.querySelector('#player-one').value;
+        const playerTwoName = document.querySelector('#player-two').value;
+
+        // Create Player Scoreboard with named variables
+    })
 
     return {playerContainer};
 })();
