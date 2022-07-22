@@ -86,12 +86,15 @@ const gamePlayers = (() => {
 
         // Function to addPlayers to the HTML
         addPlayers(players);
-    })
+
+        // Remove Submit button
+        playerFormList.removeChild(playerFormSubmit);
+    }, {once:true})
 
     return {playerContainer};
 })();
 
-// Create Game Board Vomponents
+// Create Game Board Components
 const gamePage = (() => {
     // Create container div
     const container = document.createElement('div');
@@ -148,6 +151,10 @@ const gameAction = (() => {
         element.appendChild(currentMove);
         // console.log(currentID);
     }
+
+    // Event: Keep track of player scores based off newly created divs, player-one and player-two classes
+
+    
 
     // Event: Click Action
     clickAction = (e) => {
