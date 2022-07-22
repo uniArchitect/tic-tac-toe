@@ -5,16 +5,27 @@ class Game {
     }
 }
 
+// Initialize Button
+//     document.querySelector("aside").style.display = 'none';
+//     document.querySelector('#book-menu-open').style.display = 'block';
+
 // Compose - Players 1 & 2
 const gamePlayers = (() => {
     // Create Game Menu container
     const playerContainer = document.createElement('div');
     document.body.appendChild(playerContainer).className = 'selection-container';
 
-    // Create Game Menu buttons
+    // Create Game Menu buttons - Position in the middle
     const startGameBtn = document.createElement('button');
     startGameBtn.innerText = 'Play Tic-Tac-Toe';
     playerContainer.appendChild(startGameBtn).className = 'start-btn';
+
+    // Event: Show Game Board
+    document.querySelector('.start-btn').addEventListener('click', () => {
+        document.querySelector('.start-btn').style.display = 'none'
+        document.querySelector('aside').style.visibility = 'visible';
+        document.querySelector('.container').style.visibility = 'visible';
+    })
 
     // Create Game Menu fields
     const playerMenu = document.createElement('aside');
@@ -36,6 +47,7 @@ const gamePlayers = (() => {
     playerForm.appendChild(playerFormList);
 
     // Create Player Inputs
+    // Player One Input
     playerFormList.appendChild(playerListItemOne);
     listLabelOne.setAttribute('for', 'name');
     listLabelOne.innerText = 'Player One'
@@ -44,6 +56,7 @@ const gamePlayers = (() => {
     listInputOne.setAttribute('id', 'player-one-name');
     playerListItemOne.appendChild(listInputOne);
 
+    // Player Two Input
     playerFormList.appendChild(playerListItemTwo);
     listLabelTwo.setAttribute('for', 'name');
     listLabelTwo.innerText = 'Player Two'
@@ -87,8 +100,12 @@ const gamePlayers = (() => {
         // Function to addPlayers to the HTML
         addPlayers(players);
 
+        // Remove Player Name Inputs
+        playerMenu.removeChild(playerForm);
+
         // Remove Submit button
         playerFormList.removeChild(playerFormSubmit);
+
     }, {once:true})
 
     return {playerContainer};
