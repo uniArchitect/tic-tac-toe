@@ -5,10 +5,6 @@ class Game {
     }
 }
 
-// Initialize Button
-//     document.querySelector("aside").style.display = 'none';
-//     document.querySelector('#book-menu-open').style.display = 'block';
-
 // Compose - Players 1 & 2
 const gamePlayers = (() => {
     // Create Game Menu container
@@ -24,7 +20,6 @@ const gamePlayers = (() => {
     document.querySelector('.start-btn').addEventListener('click', () => {
         document.querySelector('.start-btn').style.display = 'none'
         document.querySelector('aside').style.visibility = 'visible';
-        document.querySelector('.container').style.visibility = 'visible';
     })
 
     // Create Game Menu fields
@@ -105,6 +100,9 @@ const gamePlayers = (() => {
 
         // Remove Submit button
         playerFormList.removeChild(playerFormSubmit);
+
+        // Show game board
+        document.querySelector('.container').style.visibility = 'visible';
 
     }, {once:true})
 
@@ -254,24 +252,11 @@ const gameAction = (() => {
         // prompt('Do you want to play again?')
     }
 
-    // BUG: gameStart allows resetting of click events, but board is not cleared (Need child elements erased and id reset)
-    // gameSquare is a NodeList and cannot use .setAttribute syntax
-    // BUG: for loop to clear the board doesn't allow resetting click event
     gameStart = () => {
         gameSquare.forEach((index) => {
             index.setAttribute('id', 'open-square');
             index.innerHTML="";
         });
-
-        // function resetSquares(index) {
-        //     index.setAttribute('id', 'open-square');
-        //     index.innerHTML="";
-        // }
-        
-        // for (i = 0; i <= gameSquare.length; i++) {
-        //     gameSquare[i].setAttribute('id', 'open-square');
-        //     gameSquare[i].innerHTML=""
-        // }
 
         gameSquare.forEach(gameSquare => {
             gameSquare.addEventListener('click', clickAction, {once:true});
