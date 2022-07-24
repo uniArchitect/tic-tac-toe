@@ -1,9 +1,9 @@
-class Game {
+class Players {
     constructor(playerOneName, playerTwoName) {
         this.playerOneName = playerOneName;
         this.playerTwoName = playerTwoName;
-        this.playerOneScore = 0;
-        this.playerTwoScore = 0;
+        // this.playerOneScore = 0;
+        // this.playerTwoScore = 0;
     }
 }
 
@@ -80,9 +80,9 @@ const gamePlayers = (() => {
         playerOne.classList.add('player-one');
         playerTwo.classList.add('player-two');
 
-        // Creates Player Name : 0
-        playerOne.innerHTML = `<p>${players.playerOneName}: ${players.playerOneScore}</p>`;
-        playerTwo.innerHTML = `<p>${players.playerTwoName}: ${players.playerTwoScore}</p>`;
+        // Creates Player Name
+        playerOne.innerHTML = `<p>${players.playerOneName}</p>`;
+        playerTwo.innerHTML = `<p>${players.playerTwoName}</p>`;
     }
 
     // Event: Record Player Names to variables
@@ -94,8 +94,8 @@ const gamePlayers = (() => {
         const playerOneName = document.querySelector('#player-one-name').value;
         const playerTwoName = document.querySelector('#player-two-name').value;
 
-        // Create Player Scoreboard with named variables (Game) constructor class
-        const players = new Game(playerOneName, playerTwoName);
+        // Create Player Scoreboard with named variables (Players) constructor class
+        const players = new Players(playerOneName, playerTwoName);
 
         // Function to addPlayers to the HTML
         addPlayers(players);
@@ -173,10 +173,10 @@ const gameAction = (() => {
     }
 
     // Event: Keep track of player scores based off newly created divs, player-one and player-two classes
-    // addScore = () => {
-    //     const playerOne = document.querySelector('.player-one')
-    //     const playerTwo = document.querySelector('.player-two')
-    // }
+    addScore = () => {
+        const playerOne = document.querySelector('.player-one')
+        const playerTwo = document.querySelector('.player-two')
+    }
     
     // Event: Click Action
     clickAction = (e) => {
