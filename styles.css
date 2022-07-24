@@ -68,6 +68,46 @@ body, html {
                 border: 1px solid #FA6900;
             }
 
+            #submit {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: bold;
+                padding: 10px;
+                border-radius: 10px;
+                border: none;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px;
+                transition: .3s;
+                width: 262px;
+                height: 35px;    
+            }
+
+                #submit:hover {
+                    transition: .3s;
+                    background-color: #036564;
+                    color: white;
+                }
+
+            button {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: bold;
+                color: white;
+                background-color: #F38630;
+                padding: 10px;
+                border-radius: 10px;
+                border: none;
+                box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+                transition: .3s;
+            }
+            
+            button:hover {
+                transition: .3s;
+                background-color: #FA6900;
+                color: white;
+            }
+            
+            button:active {
+                transform: translateY(1em);
+            }
+
         .player-one, .player-two {
             display: flex;
             justify-content: center;
