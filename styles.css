@@ -11,10 +11,6 @@ body, html {
     --grid-rows: 1;
   }
 
-aside {
-    visibility: hidden;
-}
-
     .selection-container {
         display: flex;
         justify-content: center;
@@ -25,8 +21,52 @@ aside {
     }
 
         .start-btn {
-            
+            position: absolute;
+            top: 25em;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 10em;
+            height: 3em;
         }
+
+        aside {
+            visibility: hidden;
+            position: absolute;
+            top: 18em;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+            ul {
+                list-style: none;
+            }
+
+            label {
+                font-size: small;
+                font-weight: bold;
+            }
+            
+            input {
+                font-family: 'Montserrat', sans-serif;
+                margin-bottom: 15px;
+                padding: 5px;
+                height: 20px;
+                width: 250px;
+                border-radius: 5px;
+                border: 1px solid;
+                border-color: #d3d3d3;
+                transition: .3s;
+            }
+            
+            input:hover {
+                transition: .3s;
+                border-color: #aaa;
+            }
+            
+            input:focus {
+                outline: none;
+                border: 1px solid #FA6900;
+            }
 
         .player-one, .player-two {
             display: flex;
