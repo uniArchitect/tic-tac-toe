@@ -18,7 +18,15 @@ aside {
     .selection-container {
         display: flex;
         justify-content: center;
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translate(-50%,-50%);
     }
+
+        .start-btn {
+            
+        }
 
         .player-one, .player-two {
             display: flex;
@@ -27,9 +35,16 @@ aside {
             width: 8em;
             height: 2em;
             border-radius: 1em;
-            margin: 2em;
             padding: 1em;
             background-color: #E8DDCB;
+        }
+
+        .player-one {
+            margin-right: 2.5em;
+        }
+
+        .player-two {
+            margin-left: 2.5em;
         }
 
     .container {
@@ -48,8 +63,8 @@ aside {
         transform: translate(-50%,-50%);
 
         /* Define Game Board Height */
-        height: 300px;
-        width: 300px;
+        height: 25em;
+        width: 25em;
         border: black;
         box-shadow: 5px 5px lightgray;
     }
@@ -57,3 +72,19 @@ aside {
         .game-square {
             border: 1px solid black;
         }
+
+    .restart {
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 8em;
+        height: 2em;
+        border: none;
+        border-radius: 1em;
+        padding: 1em;
+        background-color: #E8DDCB;
+    }
