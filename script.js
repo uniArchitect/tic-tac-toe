@@ -2,6 +2,8 @@ class Game {
     constructor(playerOneName, playerTwoName) {
         this.playerOneName = playerOneName;
         this.playerTwoName = playerTwoName;
+        this.playerOneScore = 0;
+        this.playerTwoScore = 0;
     }
 }
 
@@ -16,7 +18,7 @@ const gamePlayers = (() => {
     startGameBtn.innerText = 'Play Tic-Tac-Toe';
     playerContainer.appendChild(startGameBtn).className = 'start-btn';
 
-    // Event: Show Game Board
+    // Event: Show Player Input Fields
     document.querySelector('.start-btn').addEventListener('click', () => {
         document.querySelector('.start-btn').style.display = 'none'
         document.querySelector('aside').style.visibility = 'visible';
@@ -49,6 +51,7 @@ const gamePlayers = (() => {
     playerListItemOne.appendChild(listLabelOne);
     listInputOne.setAttribute('type', 'text');
     listInputOne.setAttribute('id', 'player-one-name');
+    listInputOne.setAttribute('required', '');
     playerListItemOne.appendChild(listInputOne);
 
     // Player Two Input
@@ -58,6 +61,7 @@ const gamePlayers = (() => {
     playerListItemTwo.appendChild(listLabelTwo);
     listInputTwo.setAttribute('type', 'text');
     listInputTwo.setAttribute('id', 'player-two-name');
+    listInputTwo.setAttribute('required', '');
     playerListItemTwo.appendChild(listInputTwo);
 
     // Create Submit
@@ -76,8 +80,9 @@ const gamePlayers = (() => {
         playerOne.classList.add('player-one');
         playerTwo.classList.add('player-two');
 
-        playerOne.innerHTML = `<p>${players.playerOneName}</p>`;
-        playerTwo.innerHTML = `<p>${players.playerTwoName}</p>`;
+        // Creates Player Name : 0
+        playerOne.innerHTML = `<p>${players.playerOneName}: ${players.playerOneScore}</p>`;
+        playerTwo.innerHTML = `<p>${players.playerTwoName}: ${players.playerTwoScore}</p>`;
     }
 
     // Event: Record Player Names to variables
@@ -168,9 +173,11 @@ const gameAction = (() => {
     }
 
     // Event: Keep track of player scores based off newly created divs, player-one and player-two classes
-
+    // addScore = () => {
+    //     const playerOne = document.querySelector('.player-one')
+    //     const playerTwo = document.querySelector('.player-two')
+    // }
     
-
     // Event: Click Action
     clickAction = (e) => {
         // console.log(e.target);
