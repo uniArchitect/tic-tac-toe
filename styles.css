@@ -65,7 +65,7 @@ body, html {
                 
                 input:focus {
                     outline: none;
-                    border: 1px solid #FA6900;
+                    border: 1px solid #76c4ae;
                 }
 
             #submit {
@@ -82,7 +82,7 @@ body, html {
 
                 #submit:hover {
                     transition: .3s;
-                    background-color: #FA6900;
+                    background-color: #76c4ae;
                     color: white;
                 }
 
@@ -100,7 +100,7 @@ body, html {
             
                 button:hover {
                     transition: .3s;
-                    background-color: #FA6900;
+                    background-color: #76c4ae;
                     color: white;
                 }
                 
@@ -118,7 +118,7 @@ body, html {
             height: 1.5em;
             border-radius: 1em;
             padding: 1em;
-            background-color: #F38630;
+            background-color: #76c4ae;
         }
 
         .player-one {
@@ -152,7 +152,15 @@ body, html {
     }
 
         .game-square {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             border: 1px solid black;
+        }
+
+        svg {
+           width: 8em;
+           height: 8em; 
         }
 
     .restart {
