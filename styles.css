@@ -4,6 +4,7 @@ body, html {
     margin-left: 72px;
     margin-right: 72px;
     font-family: 'Montserrat', sans-serif;
+    background-color: #E8DDCB;
 }
 
 :root {
@@ -116,9 +117,10 @@ body, html {
             color: white;
             width: 8em;
             height: 1.5em;
-            border-radius: 1em;
+            border-radius: .25em;
             padding: 1em;
             background-color: #76c4ae;
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
         }
 
         .player-one {
@@ -144,18 +146,26 @@ body, html {
         left: 50%;
         transform: translate(-50%,-50%);
 
-        /* Define Game Board Height */
+        gap: .5em;
         height: 25em;
         width: 25em;
         border: black;
-        box-shadow: 5px 5px lightgray;
+        /* box-shadow: 5px 5px lightgray; */
     }
 
         .game-square {
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 1px solid black;
+            /* border: 1px solid white; */
+            border-radius: 0.5em;
+            background: #ffc3a0;
+            box-shadow: 0 1px 4px 0 rgb(0 0 0 / 20%), 0 3px 10px 0 rgb(0 0 0 / 19%);
+        }
+
+        .game-square:hover {
+            background-color: #76c4ae;
+            transition: .3s;
         }
 
         svg {
@@ -172,8 +182,8 @@ body, html {
         justify-content: center;
         align-items: center;
         width: 8em;
-        height: 2em;
+        height: 2.5em;
         border: none;
-        border-radius: 1em;
+        border-radius: .5em;
         padding: 1em;
     }
