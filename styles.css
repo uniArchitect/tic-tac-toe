@@ -15,7 +15,7 @@ body, html {
         display: flex;
         justify-content: center;
         position: absolute;
-        top: 15%;
+        top: 18%;
         left: 50%;
         transform: translate(-50%,-50%);
     }
@@ -50,23 +50,23 @@ body, html {
                 font-family: 'Montserrat', sans-serif;
                 margin-bottom: 15px;
                 padding: 5px;
-                height: 20px;
-                width: 250px;
-                border-radius: 5px;
+                height: 1.3em;
+                width: 20em;
+                border-radius: .5em;
                 border: 1px solid;
                 border-color: #d3d3d3;
                 transition: .3s;
             }
             
-            input:hover {
-                transition: .3s;
-                border-color: #aaa;
-            }
-            
-            input:focus {
-                outline: none;
-                border: 1px solid #FA6900;
-            }
+                input:hover {
+                    transition: .3s;
+                    border-color: #aaa;
+                }
+                
+                input:focus {
+                    outline: none;
+                    border: 1px solid #FA6900;
+                }
 
             #submit {
                 font-family: 'Montserrat', sans-serif;
@@ -76,21 +76,21 @@ body, html {
                 border: none;
                 box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px;
                 transition: .3s;
-                width: 262px;
-                height: 35px;    
+                width: 21em;
+                height: 3em;    
             }
 
                 #submit:hover {
                     transition: .3s;
-                    background-color: #036564;
+                    background-color: #FA6900;
                     color: white;
                 }
 
             button {
                 font-family: 'Montserrat', sans-serif;
                 font-weight: bold;
-                color: white;
-                background-color: #F38630;
+                /* color: white;
+                background-color: #F38630; */
                 padding: 10px;
                 border-radius: 10px;
                 border: none;
@@ -98,25 +98,27 @@ body, html {
                 transition: .3s;
             }
             
-            button:hover {
-                transition: .3s;
-                background-color: #FA6900;
-                color: white;
-            }
-            
-            button:active {
-                transform: translateY(1em);
-            }
+                button:hover {
+                    transition: .3s;
+                    background-color: #FA6900;
+                    color: white;
+                }
+                
+                /* button:active {
+                    transform: translateX(1px);
+                } */
 
         .player-one, .player-two {
             display: flex;
             justify-content: center;
             align-items: center;
+            font-weight: bold;
+            color: white;
             width: 8em;
-            height: 2em;
+            height: 1.5em;
             border-radius: 1em;
             padding: 1em;
-            background-color: #E8DDCB;
+            background-color: #F38630;
         }
 
         .player-one {
@@ -166,5 +168,4 @@ body, html {
         border: none;
         border-radius: 1em;
         padding: 1em;
-        background-color: #E8DDCB;
     }

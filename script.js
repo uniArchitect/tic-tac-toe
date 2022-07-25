@@ -66,7 +66,8 @@ const gamePlayers = (() => {
 
     // Create Submit
     playerFormList.appendChild(playerFormSubmit);
-    playerFormSubmit.setAttribute('type', 'submit')
+    playerFormSubmit.setAttribute('type', 'submit');
+    playerFormSubmit.setAttribute('id', 'submit');
     
     // Create a simple CLASS (Game) for player in the games so that Event Record Player can use the prototype.properties to record values into
     // Function: Add HTML elements with recorded player names
