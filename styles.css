@@ -23,7 +23,7 @@ body, html {
 
         .start-btn {
             position: absolute;
-            top: 25em;
+            top: 22em;
             left: 50%;
             transform: translate(-50%,-50%);
             width: 10em;
@@ -181,7 +181,7 @@ body, html {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 8em;
+        width: 13em;
         height: 2.5em;
         border: none;
         border-radius: .5em;

@@ -47,7 +47,7 @@ const gamePlayers = (() => {
     // Player One Input
     playerFormList.appendChild(playerListItemOne);
     listLabelOne.setAttribute('for', 'name');
-    listLabelOne.innerText = 'Player One'
+    listLabelOne.innerText = 'Player One (X)'
     playerListItemOne.appendChild(listLabelOne);
     listInputOne.setAttribute('type', 'text');
     listInputOne.setAttribute('id', 'player-one-name');
@@ -57,7 +57,7 @@ const gamePlayers = (() => {
     // Player Two Input
     playerFormList.appendChild(playerListItemTwo);
     listLabelTwo.setAttribute('for', 'name');
-    listLabelTwo.innerText = 'Player Two'
+    listLabelTwo.innerText = 'Player Two (O)'
     playerListItemTwo.appendChild(listLabelTwo);
     listInputTwo.setAttribute('type', 'text');
     listInputTwo.setAttribute('id', 'player-two-name');
@@ -71,19 +71,30 @@ const gamePlayers = (() => {
     
     // Create a simple CLASS (Game) for player in the games so that Event Record Player can use the prototype.properties to record values into
     // Function: Add HTML elements with recorded player names
-    addPlayers = (players) => {
+    addPlayerOne = (players) => {
         // Event: Add Player HTML elements
         const playerOne = document.createElement('div');
-        const playerTwo = document.createElement('div');
+        // const playerTwo = document.createElement('div');
         playerContainer.appendChild(playerOne);
-        playerContainer.appendChild(playerTwo);
+        // playerContainer.appendChild(playerTwo);
 
         playerOne.classList.add('player-one');
-        playerTwo.classList.add('player-two');
+        // playerTwo.classList.add('player-two');
 
         // Creates Player Name
         playerOne.innerHTML = `<p>${players.playerOneName}</p>`;
+        // playerTwo.innerHTML = `<p>${players.playerTwoName}</p>`;
+
+        return playerOne
+    }
+
+    addPlayerTwo = (players) => {
+        const playerTwo = document.createElement('div');
+        playerContainer.appendChild(playerTwo);
+        playerTwo.classList.add('player-two');
         playerTwo.innerHTML = `<p>${players.playerTwoName}</p>`;
+
+        return playerTwo
     }
 
     // Event: Record Player Names to variables
@@ -99,7 +110,8 @@ const gamePlayers = (() => {
         const players = new Players(playerOneName, playerTwoName);
 
         // Function to addPlayers to the HTML
-        addPlayers(players);
+        const playerOne = addPlayerOne(players);
+        const playerTwo = addPlayerTwo(players);
 
         // Remove Player Name Inputs
         playerMenu.removeChild(playerForm);
@@ -109,6 +121,8 @@ const gamePlayers = (() => {
 
         // Show game board
         document.querySelector('.container').style.visibility = 'visible';
+
+        return {playerOne, playerTwo}
 
     }, {once:true})
 
@@ -172,12 +186,6 @@ const gameAction = (() => {
         element.appendChild(currentMove);
         // console.log(currentID);
     }
-
-    // Event: Keep track of player scores based off newly created divs, player-one and player-two classes
-    addScore = () => {
-        const playerOne = document.querySelector('.player-one')
-        const playerTwo = document.querySelector('.player-two')
-    }
     
     // Event: Click Action
     clickAction = (e) => {
@@ -212,14 +220,33 @@ const gameAction = (() => {
             // Works because testWinner returns 'boolean' value true
             if (testWinner(currentID) == true && currentID == 'circle') {
                 console.log('O Wins')
+                playerTwoWin()
                 endGame()
             } else if (testWinner(currentID) == true && currentID == 'cross') {
                 console.log('X Wins')
+                playerOneWin()
                 endGame()
             } else if (testDraw() == true) {
                 console.log('Draw!')
+                playerDraw()
                 endGame()
             }
+    }
+
+    // Change player div innerHTML when win happens
+    playerOneWin = () => {
+        const playerOne = document.querySelector('.player-one');
+        gamePage.restartBtn.innerText = `${playerOne.innerText} Wins! Play Again?`;
+    }
+
+    playerTwoWin = () => {
+        const playerTwo = document.querySelector('.player-two');
+        gamePage.restartBtn.innerText = `${playerTwo.innerText} Wins! Play Again?`;
+    }
+
+    playerDraw = () => {
+        // const playerOne = document.querySelector('.player-two');
+        gamePage.restartBtn.innerText = 'Nobody won! Play Again?';
     }
 
     // Event: Changes mark for empty div
